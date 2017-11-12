@@ -1,0 +1,15 @@
+{
+    
+    "request": {
+        "locale": "en-US",
+        "type": "NewSession"
+    },
+    "session": {
+        "application": {
+            "applicationId": "some.appId"
+        },
+        "user": {
+            "userId": "some.user"
+        }
+    }
+}
