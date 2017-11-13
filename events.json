@@ -1,8 +1,14 @@
 {
-    
     "request": {
         "locale": "en-US",
-        "type": "NewSession"
+        "type": "TwitterTrendsIntent"
+    },
+    "intent": {
+        "slots": {
+            "City": {
+                "value": "Seattle"
+            }
+        }
     },
     "session": {
         "application": {
