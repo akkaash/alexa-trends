@@ -14,11 +14,16 @@ Resources:
     Properties:
       Handler: index.handler
       Runtime: nodejs6.10
+      Timeout: 300
       Environment:
         Variables:
           ALEXA_APP_ID: appId
           TWITTER_CONSUMER_KEY: twitterConsumerKey
           TWITTER_API_SECRET: twitterApiSecret
+          RESTAPI_ID: restapi_id
+          RESTAPI_REGION: restapi_region
+          RESTAPI_STAGE: restapi_stage
+          OVERRIDE_RESTAPI_URI:
       Role:
         Fn::ImportValue:
           !Join ['-', [!Ref 'ProjectId', !Ref 'AWS::Region', 'LambdaTrustRole']]
