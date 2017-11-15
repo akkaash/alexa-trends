@@ -1,58 +1,23 @@
-Welcome to the AWS CodeStar sample Alexa Skill
-==============================================
+### Welcome to the Alexa Twitter Trends Skill
 
-This sample code helps get you started with a simple skill built with the
-Amazon Alexa Skills Kit and deployed by AWS CloudFormation to AWS Lambda.
-This skill enables you to create a Minecraft Helper, and you can view the
-original source of this skill on GitHub:
 
-https://github.com/alexa/skill-sample-nodejs-howto
+This is an Alexa skill which can be used to get you the latest given a city name in the United States.
 
-What's Here
------------
+This skill uses the [Twitter API](https://developer.twitter.com) to get the latest trends for a place. It also relies on the [PY-WOEID](https://github.com/akkaash/pylambda-woeid) API to retrieve the [Where on Earth IDentifier](https://en.wikipedia.org/wiki/WOEID) for the query city name.
 
-This sample includes:
+This project is made possible by using the following:
+* [Serverless Application Model (SAM)](https://github.com/awslabs/serverless-application-model/)
+* [SAM Local](https://github.com/awslabs/aws-sam-local)
+* [Twit](https://www.npmjs.com/package/twit)
+* [YQL](https://developer.yahoo.com/yql/)
 
+#### Code Structure
 * README.md - this file
 * buildspec.yml - This YAML file is used by AWS CodeBuild to create an artifact
   that can be used to deploy to AWS Lambda through CloudFormation.
 * index.js - This file contains the AWS Lambda code used to interact with Alexa.
-* recipes.js - This file contains the JSON so Alexa knows how to craft an
-  object in Minecraft.
+* twitter-wrapper.js - This file contains the code to do `GET trends/place` and return the top 5 trends given `woeid`.
+* events.json -  This file contains a sample of list of events that can be use to do local development using [sam-local](https://github.com/awslabs/aws-sam-local)
 * package.json - This file is used by NPM to package your Alexa skill.
 * template.yml - This YAML file is used by AWS CloudFormation to update AWS Lambda
   and manage any additional AWS resources.
-
-Getting Started
----------------
-
-To work on the sample code, you'll need to clone your project's repository to your
-local computer. If you haven't, do that first. You can find instructions in the
-AWS CodeStar user guide.
-
-Once you've created your project in AWS CodeStar, go to the Amazon Alexa Portal
-and set up your skill to view it in action. Follow the tutorial provided on GitHub:
-
-https://github.com/alexa/skill-sample-nodejs-howto
-
-Since AWS CodeStar will create your AWS Lambda on your behalf, you can skip Step
-2 of the tutorial. In Step 3, you can use the Project view in AWS CodeStar to
-easily get the ARN of your AWS Lambda function. Look for AWS Lambda under Type in the
-Project Resources table.
-
-
-What Do I Do Next?
-------------------
-
-Once you've tested your AWS Lambda function from the Amazon Developer Portal, we suggest
-making a small change to index.js or recipes.js so you can see how changes pushed
-to your repository are automatically picked up by your project pipeline and deployed
-to AWS Lambda. Once you've seen how that works, start developing your own code,
-and have fun!
-
-Learn more about AWS CodeStar by reading the user guide. Ask questions or make
-suggestions on our forum.
-
-User Guide: http://docs.aws.amazon.com/codestar/latest/userguide/welcome.html
-
-Forum: https://forums.aws.amazon.com/forum.jspa?forumID=248
