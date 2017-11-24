@@ -21,3 +21,21 @@ This project is made possible by using the following:
 * package.json - This file is used by NPM to package your Alexa skill.
 * template.yml - This YAML file is used by AWS CloudFormation to update AWS Lambda
   and manage any additional AWS resources.
+
+#### How to deploy your serverless app?
+> Reference: http://docs.aws.amazon.com/lambda/latest/dg/serverless-deploy-wt.html#serverless-deploy
+
+1. Create your code bucket:
+  ```
+  $ S3_BUCKET=bucket-name # You can give ${awsAccountId}-code-bucket
+  $ aws s3 mb s3://$S3_BUCKET --region us-east-1
+  ```
+2. Build and Package your application:
+  ```
+  $ npm i && aws cloudformation package --template template.yml --s3-bucket $S3_BUCKET --output-template template-export.yml
+  ```
+3. Deploy your packaged application:
+  ```
+  aws cloudformation deploy --template-file ./template-export.yml --stack-name new-alexa-trends --capabilities CAPABILITY_IAM --parameter-overrides param1=value1 param2=value2 ...
+  ```
+  These parameters will be the environment variables specified in [template.yml](/template.yml)
