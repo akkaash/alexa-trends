@@ -10,7 +10,8 @@ Resources:
       Runtime: nodejs6.10
       Timeout: 300
       Policies:
-        FunctionName: !Ref ParamLambdaFunctionName
+        - LambdaInvokePolicy:
+            FunctionName: !Ref ParamLambdaFunctionName
       Environment:
         Variables:
           ALEXA_APP_ID: !Ref ParamAlexaAppId
