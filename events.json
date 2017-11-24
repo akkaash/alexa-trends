@@ -1,21 +1,16 @@
 {
     "request": {
-        "locale": "en-US",
-        "type": "TwitterTrendsIntent"
-    },
-    "intent": {
-        "slots": {
-            "City": {
-                "value": "Seattle"
+        "type": "IntentRequest",
+        "requestId": "requestId",
+        "intent": {
+            "name": "TwitterTrendsIntent",
+            "slots": {
+                "City": {
+                    "name": "City",
+                    "value": "Seattle"
+                }
             }
-        }
-    },
-    "session": {
-        "application": {
-            "applicationId": "some.appId"
         },
-        "user": {
-            "userId": "some.user"
-        }
+        "locale": "en-US"
     }
 }

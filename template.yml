@@ -1,12 +1,6 @@
 AWSTemplateFormatVersion: 2010-09-09
 Transform:
 - AWS::Serverless-2016-10-31
-- AWS::CodeStar
-
-Parameters:
-  ProjectId:
-    Type: String
-    Description: AWS CodeStar project ID used to associate resources to team members.
 
 Resources:
   AlexaSkillFunction:
@@ -17,16 +11,27 @@ Resources:
       Timeout: 300
       Environment:
         Variables:
-          ALEXA_APP_ID: appId
-          TWITTER_CONSUMER_KEY: twitterConsumerKey
-          TWITTER_API_SECRET: twitterApiSecret
-          RESTAPI_ID: restapi_id
-          RESTAPI_REGION: restapi_region
-          RESTAPI_STAGE: restapi_stage
-          OVERRIDE_RESTAPI_URI:
-      Role:
-        Fn::ImportValue:
-          !Join ['-', [!Ref 'ProjectId', !Ref 'AWS::Region', 'LambdaTrustRole']]
+          ALEXA_APP_ID: !Ref ParamAlexaAppId
+          TWITTER_CONSUMER_KEY: !Ref ParamTwitterConsumerKey
+          TWITTER_API_SECRET: !Ref ParamTwitterApiSecret
+          RESTAPI_ID: !Ref ParamRestApiId
+          RESTAPI_REGION: !Ref ParamRestApiRegion
+          RESTAPI_STAGE: !Ref ParamRestApiStage
+          OVERRIDE_RESTAPI_URI: override_restapi_uri
       Events:
         AlexaSkillEvent:
           Type: AlexaSkill
+
+Parameters:
+  ParamAlexaAppId:
+    Type: String
+  ParamTwitterConsumerKey:
+    Type: String
+  ParamTwitterApiSecret:
+    Type: String
+  ParamRestApiId:
+    Type: String
+  ParamRestApiRegion:
+    Type: String
+  ParamRestApiStage:
+    Type: String

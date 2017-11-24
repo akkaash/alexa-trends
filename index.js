@@ -28,14 +28,15 @@ const handlers = {
         this.emit(':ask', this.attributes.speechOutput, this.attributes.repromptSpeech);
     },
     'TwitterTrendsIntent': function () {
-        const citySlot = this.event.intent.slots.City;
+        const citySlot = this.event.request.intent.slots.City;
         let cityName;
         if (citySlot && citySlot.value) {
             cityName = citySlot.value.toLowerCase();
         }
-        
+
+        const woeidApiUri = process.env.OVERRIDE_RESTAPI_URI !== "override_restapi_uri" ? process.env.OVERRIDE_RESTAPI_URI : API_GATEWAY_URI;
         const options = {
-            uri: process.env.OVERRIDE_RESTAPI_URI || API_GATEWAY_URI,
+            uri: woeidApiUri,
             method: 'GET',
             qs: {
                 city: cityName,
@@ -57,7 +58,7 @@ const handlers = {
                     TwitterWrapper.getTrends(woeid)
                         .then(data => {
                             const cardTitle = this.t('DISPLAY_CARD_TITLE', this.t('SKILL_NAME'), cityName);
-            
+
                             const trendNames = data.map((trend, index) => {
                                 let trendOutput = trend.name + " ";
                                 if (index === (data.length - 1)) {
@@ -68,7 +69,7 @@ const handlers = {
                             });
                             const allTrends = trendNames.join();
                             this.attributes.speechOutput = this.t('RESULTS', cityName, allTrends);
-            
+
                             this.emit(':tellWithCard', this.attributes.speechOutput, cardTitle, this.attributes.speechOutput);
                         })
                         .catch(error => {
